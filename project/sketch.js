@@ -18,3 +18,7 @@
     ellipse(random(0, width), random(0, height), random(50, 100), random(50, 100));
 
   }
+
+  function deviceShaken() {
+    
+  }
