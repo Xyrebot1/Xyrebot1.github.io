@@ -20,5 +20,9 @@
   }
 
   function deviceShaken() {
+    fill(0);
+    textFont("Arial")
+    textAlign(CENTER);
+    textSize(48);
     text("Shake me baby~", width / 2, height / 2);
   }
