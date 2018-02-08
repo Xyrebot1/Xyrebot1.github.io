@@ -20,3 +20,12 @@ function mousePressed() {
     ellipse(mouseX,mouseY,150,150);
   }
 }
+
+function keyPressed() {
+  if (key === 'w' or key === 'W') {
+    background(255);
+  }
+  else if (key === 'b' or key === 'B') {
+    background(0);
+  }
+}
