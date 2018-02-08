@@ -7,8 +7,11 @@
   }
 
   function draw() {
-      if (mousePressed(RIGHT)) {
-        fill(random(255)),random(255),random(255));
-        rect(mouseX,mouseY,150,200);
-      }
+
+  }
+
+  function mousePressed() {
+    if (mouseButton == LEFT) {
+      rect(mouseX,mouseY,200,150);
+    }
   }
