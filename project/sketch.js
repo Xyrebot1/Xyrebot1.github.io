@@ -21,5 +21,4 @@
 
   function deviceShaken() {
     keyPressed()
-    mouseClicked()
   }
