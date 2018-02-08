@@ -23,6 +23,6 @@
     fill(0);
     textFont("Arial")
     textAlign(CENTER);
-    textSize(48);
+    textSize(64);
     text("Shake me baby~", width / 2, height / 2);
   }
