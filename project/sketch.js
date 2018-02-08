@@ -20,5 +20,6 @@
   }
 
   function deviceShaken() {
-    
+    keyPressed()
+    mouseClicked()
   }
