@@ -22,10 +22,10 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  if (key === 'w' or key === 'W') {
+  if (key === 'w' || key === 'W') {
     background(255);
   }
-  else if (key === 'b' or key === 'B') {
+  else if (key === 'b' || key === 'B') {
     background(0);
   }
 }
