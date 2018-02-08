@@ -20,5 +20,5 @@
   }
 
   function deviceShaken() {
-    keyPressed()
+    text("Shake me baby~", width / 2, height / 2);
   }
