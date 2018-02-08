@@ -12,10 +12,12 @@ function draw() {
 
 function mousePressed() {
   if (mouseButton === LEFT) {
+    noStroke();
     fill(random(255),random(255),random(255));
     rect(mouseX,mouseY,200,150);
   }
   else if (mouseButton === RIGHT) {
+    noStroke();
     fill(random(255),random(255),random(255));
     ellipse(mouseX,mouseY,150,150);
   }
