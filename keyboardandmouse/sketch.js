@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-  
+
 }
 
 function mousePressed() {
@@ -24,13 +24,13 @@ function mousePressed() {
   }
 }
 
-function keyPressed() {
-  if (key === 'w' || key === 'W') {
+function keyTyped() {
+  if (key === 'w') {
     bGC = 255;
-  } else if (key === 'b' || key === 'B') {
+  } else if (key === 'b') {
     bGC = 0;
   }
-  if (key === 'r' || key === 'R') {
+  if (key === 'r') {
     background(random(255), random(255), random(255));
   }
 }
