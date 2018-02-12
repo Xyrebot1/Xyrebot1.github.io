@@ -14,7 +14,9 @@ function setup() {
 }
 
 function draw() {
-
+  background(255)
+  fill(255,0,0);
+  rect(mouseX - sizeX/2, mouseY - sizeY/2, sizeX, sizeY);
 }
 
 function mousePressed() {
@@ -25,12 +27,16 @@ function mousePressed() {
 }
 
 function keyTyped() {
-  if (key === 'w') {
+  if (key === "w") {
     bGC = 255;
-  } else if (key === 'b') {
+  } else if (key === "b") {
     bGC = 0;
   }
-  if (key === 'r') {
+  if (key === "r") {
     background(random(255), random(255), random(255));
   }
+}
+
+function mouseWheel() {
+  return false;
 }
