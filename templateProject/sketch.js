@@ -23,5 +23,5 @@ function drawLight() {
     fill(0)
   }
   rectMode(CENTER);
-  rect(width / 2, height / 2, 200, 200);
+  rect(width / 2, height / 2, 400, 400);
 }
