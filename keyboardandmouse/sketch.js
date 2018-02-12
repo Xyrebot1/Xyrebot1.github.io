@@ -38,5 +38,6 @@ function keyTyped() {
 }
 
 function mouseWheel() {
+  sizeX += event.delta
   return false;
 }
