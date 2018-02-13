@@ -1,27 +1,30 @@
-let lightSwitch;
+let a = 80;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  lightSwitch = true;
+  createCanvas(700, 400);
+  background(0);
+  stroke(255);
+  noLoop();
 }
 
 function draw() {
-  drawLight();
+  line(a, 0, a, height);
+
+  for (let a = 120; a < 200; a += 2) {
+    line(a, 0, a, height);
+  }
+
+  drawAnotherLine();
+
+  drawYetAnotherLine();
+
 }
 
-function keyTyped() {
-  if (key === ' ') {
-    lightSwitch = !lightSwitch;
-    return false;
-  }
+function drawAnotherLine() {
+  let a = 320;
+  line(a, 0, a, height);
 }
 
-function drawLight() {
-  if (lightSwitch === true) {
-    fill(255)
-  } else {
-    fill(0)
-  }
-  rectMode(CENTER);
-  rect(width / 2, height / 2, 400, 400);
+function drawYetAnotherLine() {
+  line(a + 5, 0, a + 5, height);
 }
