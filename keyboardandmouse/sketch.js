@@ -6,6 +6,8 @@ let sizeY;
 let bGC1;
 let bGC2;
 let bGC3;
+let xLoc;
+let yLoc;
 let shapes;
 let mode;
 let alternate;
@@ -18,6 +20,8 @@ function setup() {
   bGC1 = 255;
   bGC2 = 255;
   bGC3 = 255;
+  xLoc = []
+  yLoc = []
   shapes = []
   mode = 1;
   alternate = false;
@@ -48,8 +52,8 @@ function mousePressed() {
   if (mouseButton === LEFT) {
     fill(255, 0, 0);
     noStroke();
-    append(shapes,mouseX)
-    append(shapes,mouseY)
+    append(xLoc,mouseX)
+    append(yLoc,mouseY)
     if (mode === 1) {
       rect(mouseX - sizeX / 2, mouseY - sizeY / 2, sizeX, sizeY);
     }
@@ -57,7 +61,12 @@ function mousePressed() {
       ellipse(mouseX - sizeX, mouseY - sizeY, sizeX, sizeY);
     }
     if (mode === 3) {
-      triangle(mouseX, mouseY, mouseX - sizeX, mouseY - sizeY, mouseX + sizeX, mouseY + sizeY);
+      if (alternate) {
+        triangle(mouseX + sizeX / 2, mouseY, mouseX - sizeX / 2, mouseY + sizeY, mouseX - sizeX / 2, mouseY - sizeY);
+      }
+      else {
+        triangle(mouseX, mouseY + sizeY / 2, mouseX + sizeX, mouseY - sizeY / 2, mouseX - sizeX, mouseY - sizeY / 2);
+      }
     }
   }
   if (mouseButton === RIGHT) {
