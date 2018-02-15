@@ -18,9 +18,9 @@ function setup() {
   bGC1 = 255;
   bGC2 = 255;
   bGC3 = 255;
-  shapes = ['']
+  shapes = []
   mode = 1;
-  alternate = true;
+  alternate = false;
 
 }
 
@@ -36,10 +36,10 @@ function draw() {
   }
   if (mode === 3) {
     if (alternate) {
-      triangle(mouseX + sizeX, mouseY, mouseX , mouseY + sizeY, mouseX, mouseY - sizeY);
+      triangle(mouseX + sizeX / 2, mouseY, mouseX - sizeX / 2, mouseY + sizeY, mouseX - sizeX / 2, mouseY - sizeY);
     }
     else {
-      triangle(mouseX, mouseY + sizeY, mouseX + sizeX, mouseY - sizeY / 2, mouseX - sizeX, mouseY - sizeY / 2);
+      triangle(mouseX, mouseY + sizeY / 2, mouseX + sizeX, mouseY - sizeY / 2, mouseX - sizeX, mouseY - sizeY / 2);
     }
   }
 }
@@ -48,6 +48,8 @@ function mousePressed() {
   if (mouseButton === LEFT) {
     fill(255, 0, 0);
     noStroke();
+    append(shapes,mouseX)
+    append(shapes,mouseY)
     if (mode === 1) {
       rect(mouseX - sizeX / 2, mouseY - sizeY / 2, sizeX, sizeY);
     }
@@ -84,7 +86,7 @@ function keyTyped() {
     bGC2 = random(255);
     bGC3 = random(255);
   }
-  else if (key === a) {
+  else if (key === "a") {
     alternate = !alternate
   }
 }
