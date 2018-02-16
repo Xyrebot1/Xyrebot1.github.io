@@ -1,27 +1,22 @@
-let lightSwitch;
+let hubris = [];
+let xLoc = [];
+let yLoc = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  lightSwitch = true;
 }
 
 function draw() {
-  drawLight();
-}
-
-function keyTyped() {
-  if (key === ' ') {
-    lightSwitch = !lightSwitch;
-    return false;
+  background(255)
+  for (let test = 0; test < xLoc.length; test++) {
+    fill(random(255),random(255),random(255),random(255))
+    rect(xLoc[test] - 50, yLoc[test] - 50, 100, 100)
   }
 }
 
-function drawLight() {
-  if (lightSwitch === true) {
-    fill(255)
-  } else {
-    fill(0)
+function mousePressed() {
+  if (mouseButton === LEFT) {
+    append(xLoc, mouseX);
+    append(yLoc, mouseY);
   }
-  rectMode(CENTER);
-  rect(width / 2, height / 2, 400, 400);
 }
