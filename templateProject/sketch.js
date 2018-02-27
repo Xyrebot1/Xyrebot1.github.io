@@ -1,30 +1,15 @@
-let a = 80;
-
 function setup() {
-  createCanvas(700, 400);
-  background(0);
-  stroke(255);
-  noLoop();
+  createCanvas(windowWidth, windowHeight)
 }
 
 function draw() {
-  line(a, 0, a, height);
-
-  for (let a = 120; a < 200; a += 2) {
-    line(a, 0, a, height);
+  fill(random(255), random(255), random(255), random(255));
+  if (mouseIsPressed && keyIsPressed && (key === "t" || key === "T")) {
+    let x = random(width)
+    let y = random(height)
+    triangle(x, y, x - 50, y + 50, x + 50, y + 50);
   }
-
-  drawAnotherLine();
-
-  drawYetAnotherLine();
-
-}
-
-function drawAnotherLine() {
-  let a = 320;
-  line(a, 0, a, height);
-}
-
-function drawYetAnotherLine() {
-  line(a + 5, 0, a + 5, height);
+  if (keyIsPressed && (key === "z" || key === "Z") && (key === "x" || key === "X")) {
+    ellipse(random(0, width), random(0, height), random(50,100))
+  }
 }
