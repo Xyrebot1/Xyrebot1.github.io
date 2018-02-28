@@ -6,15 +6,23 @@
 // changing according to time. You may want to investigate the millis()
 // function at processing.org/reference.
 let state;
+let redLightDuration, yellowLightDuration, greenLightDuration;
+let lastTimeLightChange;
 
 function setup() {
   createCanvas(600, 600);
   state = 1;
+  redLightDuration = 3000;
+  yellowLightDuration = 1500;
+  greenLightDuration = 3000;
+  lastTimeLightChange = millis();
 }
 
 function draw() {
   background(255);
   drawOutlineOfLights();
+  checkIfLightSwitched();
+  displayCorrectLight();
 }
 
 function drawOutlineOfLights() {
@@ -22,40 +30,57 @@ function drawOutlineOfLights() {
   rectMode(CENTER);
   fill(0);
   rect(width / 2, height / 2, 75, 200, 10);
-
   //lights
   fill(255);
-  if (state === 3) {
-    fill(255, 0, 0);
-    ellipse(width / 2, height / 2 - 65, 50, 50); //top
-    fill(255);
-    ellipse(width / 2, height / 2, 50, 50); //middle
-    fill(255);
-    ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
-  }
-  if (state === 2) {
-    fill(255);
-    ellipse(width / 2, height / 2 - 65, 50, 50); //top
-    fill(255, 255, 0);
-    ellipse(width / 2, height / 2, 50, 50); //middle
-    fill(255);
-    ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
-  }
+  ellipse(width / 2, height / 2 - 65, 50, 50); //top
+  ellipse(width / 2, height / 2, 50, 50); //middle
+  ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
+}
+
+function drawGreenLight() {
+  fill(0,255,0);
+  ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
+}
+
+function drawYellowLight() {
+  fill(255,255,0);
+  ellipse(width / 2, height / 2, 50, 50); //middle
+}
+
+function drawRedLight() {
+  fill(255,0,0);
+  ellipse(width / 2, height / 2 - 65, 50, 50); //top
+}
+
+function checkIfLightSwitched() {
   if (state === 1) {
-    fill(255);
-    ellipse(width / 2, height / 2 - 65, 50, 50); //top
-    fill(255);
-    ellipse(width / 2, height / 2, 50, 50); //middle
-    fill(0, 255, 0);
-    ellipse(width / 2, height / 2 + 65, 50, 50); //bottom
+    if (millis() > lastTimeLightChange + greenLightDuration) {
+      state = 2;
+      lastTimeLightChange = millis();
+    }
+  }
+  else if (state === 2) {
+    if (millis() > lastTimeLightChange + yellowLightDuration) {
+      state = 3;
+      lastTimeLightChange = millis();
+    }
+  }
+  else if (state === 3) {
+    if (millis() > lastTimeLightChange + redLightDuration) {
+      state = 1;
+      lastTimeLightChange = millis();
+    }
   }
 }
 
-function mouseClicked() {
-  if (state < 3) {
-    state += 1;
+function displayCorrectLight() {
+  if (state === 1) {
+    drawGreenLight();
   }
-  else {
-    state = 1;
+  else if (state === 2) {
+    drawYellowLight();
+  }
+  else if (state === 3) {
+    drawRedLight();
   }
 }
