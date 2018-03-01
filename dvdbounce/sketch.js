@@ -25,12 +25,12 @@ function setup() {
 
 function draw() {
   background(255);
-  if (button === false) {
-    thePlayButton();
-  }
-  else if (button === true) {
+  if (button) {
     moveThing();
     displayThing();
+  }
+  else {
+    thePlayButton();
   }
 }
 
@@ -59,9 +59,24 @@ function displayThing() {
 }
 
 function thePlayButton() {
-  fill(0, 0, 255);
-  rect(width/2 - 150 , height/2 - 100, 400, 200);
+  let buttonWidth = 300;
+  let buttonHeight = 200;
+  let leftSide = width / 2 - buttonWidth / 2;
+  let topSide = height / 2 - buttonHeight / 2;
+  let rightSide = leftSide + buttonWidth;
+  let bottomSide = topSide + buttonHeight;
+
+  rect(leftSide, topSide, buttonWidth, buttonHeight);
   fill(0);
-  textSize(50);
-  text("Play", width/2, height/2);
+  textSize(130);
+  text("Play", leftSide + 25, height / 2 + buttonHeight / 4);
+  if (mouseX >= leftSide && mouseX <= rightSide && mouseY >= topSide && mouseY <= bottomSide) {
+    fill(125);
+    if (mouseIsPressed) {
+      button = true;
+    }
+  }
+  else {
+    fill(0, 255, 255);
+  }
 }
