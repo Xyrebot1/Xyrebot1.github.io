@@ -8,15 +8,19 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  noCursor();
+  background(0);
   drawPoints();
 }
 
 function drawPoints() {
-  for (r = 50; r < windowWidth; r += 50) {
-    for (t = 50; t < windowHeight; t += 50) {
+  let pointLoc = 35;
+  for (let r = pointLoc; r < windowWidth; r += pointLoc) {
+    for (let t = pointLoc; t < windowHeight; t += pointLoc) {
       point(r, t);
+      ellipse(r, t, 4, 4);
+      stroke(random(255), random(255), random(255));
+      line(r, t, mouseX, mouseY);
     }
   }
-
 }
