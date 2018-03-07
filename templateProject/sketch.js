@@ -1,21 +1,28 @@
 let state;
-let windowHalfWidth
+let windowHalfWidth;
+let showCursor;
+let button;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   windowHalfWidth = windowWidth / 2
   state = 0
+  showCursor = 0
+  noCursor()
+  button = false;
 }
 
 function draw() {
   background(200);
-  rect(windowHalfWidth, 0, windowHalfWidth, windowHeight)
+  strokeWeight(2);
+  if (button === true) {
+    sideMenu();
+  }
+  else if (button === false) {
+    menuStart();
+  }
+  noFill()
   altCursor();
-  menuStart();
-  line(0, 0, mouseX, mouseY);
-  line(windowHalfWidth, 0, mouseX, mouseY);
-  line(0, windowHeight, mouseX, mouseY);
-  line(windowHalfWidth, windowHeight, mouseX, mouseY);
 }
 
 function menuStart() {
@@ -25,25 +32,45 @@ function menuStart() {
   let topSide = height / 2 - buttonHeight / 2;
   let rightSide = leftSide + buttonWidth;
   let bottomSide = topSide + buttonHeight;
-
-  rect(leftSide, topSide, buttonWidth, buttonHeight);
   fill(0);
+  text("Play", leftSide, topSide);
   if (mouseX >= leftSide && mouseX <= rightSide && mouseY >= topSide && mouseY <= bottomSide) {
     fill(125);
+    rect(leftSide, topSide, buttonWidth, buttonHeight);
     if (mouseIsPressed) {
       button = true;
     }
   }
   else {
     fill(0, 255, 255);
+    rect(leftSide, topSide, buttonWidth, buttonHeight);
   }
 }
 
 function altCursor() {
-  if (mouseX >= windowHalfWidth) {
-    // hide the circle
+  checkLoc();
+  if (showCursor === 1) {
+    fill(0);
+    ellipse(mouseX, mouseY, 20);
   }
   else {
-    ellipse(mouseX, mouseY, 10)
+    fill(0);
+    rect(mouseX - 10, mouseY - 10, 20, 20);
   }
+}
+
+function checkLoc() {
+  if (mouseX >= windowHalfWidth) {
+    showCursor = 0;
+    state = 0;
+  }
+  else {
+    showCursor = 1;
+    state = 1;
+  }
+}
+
+function sideMenu() {
+  fill(255);
+  rect(windowHalfWidth, 0, windowHalfWidth, windowHeight);
 }
