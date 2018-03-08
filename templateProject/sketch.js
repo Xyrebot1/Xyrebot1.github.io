@@ -1,76 +1,35 @@
-let state;
-let windowHalfWidth;
-let showCursor;
-let button;
+// p5js template project - replace with project title
+// Dan Schellenberg - replace with your name
+// Feb 2, 2018 - replace with the date
 
+// global variables
+let gear;
+
+// the preload function guarentees that the code inside the function is
+// executed before the rest of the program runs -- helpful for things
+// like loading images (since JS is asynchronous)
+function preload() {
+  gear = loadImage("images/gear.png");
+}
+
+// the setup function will only run once (before the draw loop begins)
+// this is where you want to set up the environment (size of canvas, etc)
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  windowHalfWidth = windowWidth / 2
-  state = 0
-  showCursor = 0
-  noCursor()
-  button = false;
+  console.log("Hey there~")
 }
 
 function draw() {
-  background(200);
-  strokeWeight(2);
-  if (button === true) {
-    sideMenu();
-  }
-  else if (button === false) {
-    menuStart();
-  }
-  noFill()
-  altCursor();
-}
+  background(255);
 
-function menuStart() {
-  let buttonHeight = 60;
-  let buttonWidth = 160;
-  let leftSide = width / 4 - buttonWidth / 2;
-  let topSide = height / 2 - buttonHeight / 2;
-  let rightSide = leftSide + buttonWidth;
-  let bottomSide = topSide + buttonHeight;
-  fill(0);
-  text("Play", leftSide, topSide);
-  if (mouseX >= leftSide && mouseX <= rightSide && mouseY >= topSide && mouseY <= bottomSide) {
-    fill(125);
-    rect(leftSide, topSide, buttonWidth, buttonHeight);
-    if (mouseIsPressed) {
-      button = true;
-    }
-  }
-  else {
-    fill(0, 255, 255);
-    rect(leftSide, topSide, buttonWidth, buttonHeight);
-  }
-}
+  image(gear, 0, 0);
 
-function altCursor() {
-  checkLoc();
-  if (showCursor === 1) {
-    fill(0);
-    ellipse(mouseX, mouseY, 20);
-  }
-  else {
-    fill(0);
-    rect(mouseX - 10, mouseY - 10, 20, 20);
-  }
-}
+  stroke(0);
+  line(0, 0, 200, 200);
 
-function checkLoc() {
-  if (mouseX >= windowHalfWidth) {
-    showCursor = 0;
-    state = 0;
-  }
-  else {
-    showCursor = 1;
-    state = 1;
-  }
-}
+  fill(0, 255, 0, 100);
+  noStroke();
 
-function sideMenu() {
-  fill(255);
-  rect(windowHalfWidth, 0, windowHalfWidth, windowHeight);
+  rect(mouseX, mouseY, 100, 300);
+  ellipse(400, 150, 300, 200);
 }
