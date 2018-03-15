@@ -1,41 +1,35 @@
-let clockSize;
+// p5js template project - replace with project title
+// Dan Schellenberg - replace with your name
+// Feb 2, 2018 - replace with the date
 
+// global variables
+let backgroundMusic;
+let spellSound;
+
+// the preload function guarentees that the code inside the function is
+// executed before the rest of the program runs -- helpful for things
+// like loading images (since JS is asynchronous)
+function preload() {
+  backgroundMusic = loadSound("assets/four_loop.mp3");
+  spellSound = loadSound("assets/spell2.wav")
+}
+
+// the setup function will only run once (before the draw loop begins)
+// this is where you want to set up the environment (size of canvas, etc)
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  if (width > height) {
-    clockSize = height * 0.9;
-  }
-  else {
-    clockSize = width * 0.9;
-  }
-  angleMode(DEGREES)
+  backgroundMusic.setVolume(0.4);
+  backgroundMusic.loop();
+  spellSound.setVolume(0.7);
 }
 
 function draw() {
-  background(255);
+  // background(255);
+}
 
-  push();
-  translate(width / 2, height / 2);
-  strokeWeight(8)
-  fill(255);
-  ellipse(0, 0, clockSize, clockSize);
-
-  fill(0);
-  ellipse(0, 0, 10, 10);
-
-
-  strokeWeight(10);
-  strokeCap(SQUARE);
-  for (let i = 0; i < 12; i++) {
-    line(0, clockSize / 2 *0.95, 0, clockSize / 2 * 0.75);
-    rotate(360 / 12);
-  }
-
-  strokeWeight(4);
-  for (let j = 0; j < 60; j++) {
-    line(0, clockSize / 2 *0.95, 0, clockSize / 2 * 0.75);
-    rotate(360 / 60);
-  }
-
-  pop();
+function mousePressed() {
+  fill(random(255), random(255), random(255));
+  noStroke();
+  ellipse(random(width), random(height), 50, 50);
+  spellSound.play();
 }
