@@ -12,10 +12,12 @@ let amountOfDrones;
 let lastInterval;
 let autoClick;
 let crystal;
+let clickNoise;
 
 //Something to fill the background for now
 function preload() {
-  crystal = loadImage("images/Alliram.png")
+  crystal = loadImage("images/Alliram.png");
+  clickNoise = loadSound("assets/8bit_gunloop_explosion.wav")
 }
 
 function setup() {
@@ -33,7 +35,7 @@ function setup() {
   cursorEffect = false;
   lastInterval = millis();
   autoClick = 5000;
-
+  clickNoise.setVolume(0.5);
 }
 
 function draw() {
@@ -46,10 +48,11 @@ function draw() {
     dronePurchase();
     aDrone();
     altCursor();
-  } else if (button === false) {
+  }
+  else if (button === false) {
     fill(100, 255, 0);
     textStyle(BOLD)
-    text("JUST ANOTHER CLICKER GAME", width / 16, 250);
+    text("JUST ANOTHER CLICKER GAME", width / 16, 250); // Title
     menuStart();
   }
   noFill()
@@ -57,16 +60,22 @@ function draw() {
 
 // Just a bunch of crystals having a party
 function crystalParty() {
-  image(crystal, 50, 50, windowHalfWidth / 4, windowHeight / 4);
+  image(crystal, 50, 50, windowHalfWidth / 2, windowHeight / 2);
   image(crystal, windowHalfWidth / 2, 50, windowHalfWidth / 4, windowHeight / 4);
   image(crystal, 50, windowHeight / 2, windowHalfWidth / 4, windowHeight / 4);
-  image(crystal, windowHalfWidth / 2, windowHeight / 2, windowHalfWidth / 4, windowHeight / 4);
+  image(crystal, windowHalfWidth / 2 - 50, windowHeight / 2 - 50, windowHalfWidth / 2, windowHeight / 2);
+}
+
+function mouseEffect() {
+  text("+" + damage, mouseX, mouseY);
+  
 }
 
 // Every click gives you points
 function mouseClicked() {
   if (button === true && showCursor === 1) {
     points += damage;
+    clickNoise.play();
   }
 }
 
@@ -90,12 +99,14 @@ function powerUpgrade() {
       damage *= 2;
       if (firstDigit[0] === "1") {
         priceTag *= 5;
-      } else if (firstDigit[0] === "5") {
+      }
+      else if (firstDigit[0] === "5") {
         priceTag *= 2;
       }
       firstDigit = str(priceTag);
     }
-  } else {
+  }
+  else {
     fill(100, 255, 0);
     rect(leftSide, topSide, buttonWidth, buttonHeight);
     fill(0);
@@ -125,7 +136,8 @@ function dronePurchase() {
       priceTagDrone += priceTagDrone;
       amountOfDrones += 1;
     }
-  } else {
+  }
+  else {
     fill(100, 255, 0);
     rect(leftSide, topSide, buttonWidth, buttonHeight);
     fill(0);
@@ -163,7 +175,8 @@ function menuStart() {
     if (mouseIsPressed) {
       button = true;
     }
-  } else {
+  }
+  else {
     fill(0, 255, 255);
     rect(leftSide, topSide, buttonWidth, buttonHeight);
     fill(0)
@@ -175,16 +188,18 @@ function menuStart() {
 function altCursor() {
   checkLoc();
   if (showCursor === 1) {
-    cursor('images/cursor-target-enemy.cur');
-  } else {
-    cursor('images/SC2-cursor.cur');
+    cursor("images/cursor-target-enemy.cur");
+  }
+  else if (showCursor === 0){
+    cursor("images/SC2-cursor.cur");
   }
 }
 
 function checkLoc() {
   if (mouseX >= windowHalfWidth) {
     showCursor = 0;
-  } else {
+  }
+  else {
     showCursor = 1;
   }
 }
