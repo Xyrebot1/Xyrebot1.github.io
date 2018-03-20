@@ -68,7 +68,7 @@ function crystalParty() {
 
 function mouseEffect() {
   text("+" + damage, mouseX, mouseY);
-  
+
 }
 
 // Every click gives you points
