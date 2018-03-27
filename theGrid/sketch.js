@@ -18,7 +18,7 @@ function draw() {
   displayGrid();
 }
 
-function keyPressed() {
+function keyTyped() {
   grid = createRandom2DArray(cols, rows);
 }
 
