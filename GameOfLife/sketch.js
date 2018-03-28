@@ -1,17 +1,17 @@
-// The Grid
-// Dan Schellenberg - replace with your name
+// The Game of Life
+// Xyre Abelanes
 // March 26, 2018
 
-let cols = 64;
-let rows = 64;
-let grid
+let cols = 80;
+let rows = 80;
+let grid;
 let cellSize;
 let autoplay;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight)
+  createCanvas(windowWidth, windowHeight);
   cellSize = width / cols;
-  grid = createRandom2DArray(cols, rows)
+  grid = createRandom2DArray(cols, rows);
   autoplay = false;
 }
 
@@ -22,7 +22,7 @@ function draw() {
 }
 
 function autoPlayIfRequired() {
-  if (autoplay && frameCount % 10 === 0) {
+  if (autoplay && frameCount % 4 === 0) {
     nextTurn();
   }
 }
@@ -65,16 +65,16 @@ function nextTurn() {
 
 function keyPressed() {
   if (key === "r" || key === "R") {
-    grid = createRandom2dArray(cols, rows);
+    grid = createRandom2DArray(cols, rows);
   }
   else if (key === " ") {
     nextTurn();
   }
   else if (key === "c" || key === "C") {
-    grid = createEmpty2dArray(cols, rows);
+    grid = createEmptyArray(cols, rows);
   }
   else if (key === "a" || key === "A") {
-    autoPlay = !autoPlay;
+    autoplay = !autoplay;
   }
 }
 
