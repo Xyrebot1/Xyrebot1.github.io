@@ -1,4 +1,3 @@
-let state;
 let windowHalfWidth;
 let showCursor;
 let button;
@@ -23,9 +22,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   windowHalfWidth = windowWidth / 2
-  state = 0;
-  showCursor = 0;
-  button = false;
+  showCursor = 0; // state variable for which cursor to show
+  button = false; // state variable for the play button
   points = 0;
   priceTag = 100
   priceTagDrone = 15;
@@ -35,7 +33,7 @@ function setup() {
   cursorEffect = false;
   lastInterval = millis();
   autoClick = 5000;
-  clickNoise.setVolume(0.5);
+  clickNoise.setVolume(0.5); 
 }
 
 function draw() {
