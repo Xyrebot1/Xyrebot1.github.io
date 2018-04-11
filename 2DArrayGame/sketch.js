@@ -71,7 +71,7 @@ function displayGrid() {
   for (let x = 0; x < cols; x++) {
     for (let y = 0; y < rows; y++) {
       if (grid[x][y] === 0) {
-        fill(255);
+        fill(240);
       }
       else if (grid[x][y] === 2) {
         fill(255, 50, 50);
@@ -109,6 +109,7 @@ function keyPressed() {
     gridMode = 0;
   }
   if (key === "j" || key === "J") {
+    clearOutBodies();
     moveX = 0;
     moveY = 0;
     grid = firstMaze;
@@ -119,6 +120,7 @@ function keyPressed() {
   //   gridMode = 1;
   // }
   if (key === "s" || key === "S") {
+    clearOutBodies();
     moveX = 0;
     moveY = 0;
     if (gridMode === 0) {
@@ -152,6 +154,18 @@ function keyPressed() {
       moveX -= 1;
     }
   }
+}
+
+function clearOutBodies() {
+  let theGrid = grid;
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      if (theGrid[x][y] === 2) {
+        theGrid[x][y] = 0;
+      }
+    }
+  }
+  return theGrid;
 }
 
 function createEmpty2dArray(cols, rows) {
