@@ -9,8 +9,11 @@ let cellSize;
 let moveX;
 let moveY;
 let gridMode;
+let firstThingy;
 let firstMaze;
-
+function preload() {
+  firstMaze = loadStrings("mazes/Easy.txt");
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cellSize = width / (cols * 1.8);
@@ -18,7 +21,7 @@ function setup() {
   moveX = 0;
   moveY = 0;
   gridMode = 0;
-  firstMaze = [
+  firstThingy = [
     [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
     [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
