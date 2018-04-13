@@ -10,14 +10,20 @@ let moveX;
 let moveY;
 let gridMode;
 let firstThingy;
-let firstMaze;
+let loadTheMaze;
+let lines;
+let mazeGrid;
+
 function preload() {
-  firstMaze = loadStrings("mazes/Easy.txt");
+  loadTheMaze = "assets/mazes/Easy.txt";
+  lines = loadStrings(loadTheMaze);
 }
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cellSize = width / (cols * 1.8);
   grid = createEmpty2dArray(cols, rows);
+  mazeGrid = createEmpty2dArray(rows, cols);
   moveX = 0;
   moveY = 0;
   gridMode = 0;
@@ -56,6 +62,13 @@ function setup() {
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
+
+  for (let y = 0; y < cols; y++) {
+    for (let x = 0; x < rows; x++) {
+      let tileType = lines[y][x];
+      mazeGrid[x][y] = tileType;
+    }
+  }
 }
 
 function draw() {
@@ -115,7 +128,7 @@ function keyPressed() {
     clearOutBodies();
     moveX = 0;
     moveY = 0;
-    grid = firstMaze;
+    grid = mazeGrid;
     gridMode = 1;
   }
   // else if (key === "m" || key === "M") {
@@ -130,7 +143,7 @@ function keyPressed() {
       grid = createEmpty2dArray(cols, rows);
     }
     else if (gridMode === 1) {
-      grid = firstMaze;
+      grid = mazeGrid;
     }
   }
   else if (keyCode === DOWN_ARROW && moveY < rows - 1) {
