@@ -1,6 +1,6 @@
-// grid demo
-// Dan Schellenberg
-// Mar 26, 2018
+// Maze Game
+// Xyre Abelanes
+// April 16, 2018
 
 let rows = 27;
 let cols = 33;
@@ -23,7 +23,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   cellSize = width / (cols * 1.8);
   grid = createEmpty2dArray(cols, rows);
-  mazeGrid = createEmpty2dArray(rows, cols);
+  mazeGrid = createEmpty2dArray(cols, rows);
   moveX = 0;
   moveY = 0;
   gridMode = 0;
@@ -63,9 +63,9 @@ function setup() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
 
-  for (let y = 0; y < cols; y++) {
-    for (let x = 0; x < rows; x++) {
-      let tileType = lines[y][x];
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      let tileType = lines[x][y];
       mazeGrid[x][y] = tileType;
     }
   }
