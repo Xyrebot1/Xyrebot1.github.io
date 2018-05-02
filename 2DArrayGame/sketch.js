@@ -27,7 +27,11 @@ function preload() {
   loadThreeMaze = "assets/mazes/3rdMaze.txt";
   lines = loadStrings(loadOneMaze);
   lines2 = loadStrings(loadTwoMaze);
+<<<<<<< HEAD
   lines3 = loadStrings(loadThreeMaze)
+=======
+  lines3 = loadStrings(loadThreeMaze);
+>>>>>>> f584dd91cb97ee4252f786d0cd5cdfc6d24ce01e
 }
 
 function setup() {
