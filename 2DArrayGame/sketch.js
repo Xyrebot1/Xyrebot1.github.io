@@ -9,88 +9,92 @@ let cellSize;
 let moveX;
 let moveY;
 let gridMode;
-let firstThingy;
-let loadTheMaze;
+let loadOneMaze;
+let loadTwoMaze;
+let loadThreeMaze;
 let lines;
+let lines2;
+let lines3;
 let mazeGrid;
+let mazeGrid2;
+let mazeGrid3;
+let cheatMode = false;
 
+// The maps of Mazes
 function preload() {
-  loadTheMaze = "assets/mazes/Easy.txt";
-  lines = loadStrings(loadTheMaze);
+  loadOneMaze = "assets/mazes/1stMaze.txt";
+  loadTwoMaze = "assets/mazes/2ndMaze.txt";
+  loadThreeMaze = "assets/mazes/3rdMaze.txt";
+  lines = loadStrings(loadOneMaze);
+  lines2 = loadStrings(loadTwoMaze);
+  lines3 = loadStrings(loadThreeMaze)
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cellSize = width / (cols * 1.8);
-  grid = createEmpty2dArray(cols, rows);
   mazeGrid = createEmpty2dArray(cols, rows);
+  mazeGrid2 = createEmpty2dArray(cols, rows);
+  mazeGrid3 = createEmpty2dArray(cols, rows);
   moveX = 0;
-  moveY = 0;
-  gridMode = 0;
-  firstThingy = [
-    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  ];
+  moveY = 5;
+  gridMode = 1;
 
+  // preparing the mazes
   for (let x = 0; x < cols; x++) {
     for (let y = 0; y < rows; y++) {
       let tileType = lines[x][y];
       mazeGrid[x][y] = tileType;
     }
   }
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      let tileType = lines2[x][y];
+      mazeGrid2[x][y] = tileType;
+    }
+  }
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      let tileType = lines3[x][y];
+      mazeGrid3[x][y] = tileType;
+    }
+  }
+  grid = mazeGrid;
 }
 
 function draw() {
   background(255);
   displayGrid();
   playerThing();
+  textSize(40);
+  text("Use Arrow Keys to move.", width / 2 + 150, height / 4 - 200);
+  // Shown at the end screen
+  if (gridMode === 4) {
+    textSize(50);
+    fill(random(255),random(255),random(255));
+    text("You finished the MAZE! Well Done!",width / 2 - 300, height / 2);
+  }
 }
 
+// disables window scrolling
 function noscroll() {
   window.scrollTo(0, 0);
 }
 
 window.addEventListener("scroll", noscroll);
 
+//shows the grid(mazes)
 function displayGrid() {
   for (let x = 0; x < cols; x++) {
     for (let y = 0; y < rows; y++) {
-      if (grid[x][y] === 0) {
+      if (grid[x][y] === 0 || grid[x][y] === "0") {
         fill(240);
       }
-      else if (grid[x][y] === 2) {
+      else if (grid[x][y] === 2 || grid[x][y] === "2") {
         fill(255, 50, 50);
+      }
+      else if (grid[x][y] === 3 || grid[x][y] === "3") {
+        fill(0, 255, 50);
       }
       else {
         fill(50);
@@ -100,78 +104,116 @@ function displayGrid() {
   }
 }
 
+//The red square in the screen
 function playerThing() {
   grid[moveX][moveY] = 2;
 }
 
+//just a mini cheat mode
 function mousePressed() {
   let xCoord = floor(mouseX / cellSize);
   let yCoord = floor(mouseY / cellSize);
 
-  if (grid[xCoord][yCoord] === 1) {
+  if (grid[xCoord][yCoord] === 1 || grid[xCoord][yCoord] === "1" && cheatMode) {
     grid[xCoord][yCoord] = 0;
   }
-  else if (grid[xCoord][yCoord] === 0) {
+  else if (grid[xCoord][yCoord] === 0 || grid[xCoord][yCoord] === "0" && cheatMode) {
     grid[xCoord][yCoord] = 1;
   }
-  else {
-    grid[xCoord][yCoord] = 2;
+}
+
+// goes to the next maze after reaching the green square
+function nextLevel() {
+  gridMode += 1;
+  if (gridMode === 1) {
+    clearOutBodies();
+    moveX = 0;
+    moveY = 5;
+    grid = mazeGrid;
+  }
+  else if (gridMode === 2) {
+    clearOutBodies();
+    moveX = 8;
+    moveY = 26;
+    grid = mazeGrid2;
+  }
+  if (gridMode === 3) {
+    clearOutBodies();
+    moveX = 32;
+    moveY = 25;
+    grid = mazeGrid3;
   }
 }
 
 function keyPressed() {
   if (key === "c" || key === "C") {
-    grid = createEmpty2dArray(cols, rows);
-    gridMode = 0;
+    cheatMode = !cheatMode;
   }
-  if (key === "j" || key === "J") {
-    clearOutBodies();
-    moveX = 0;
-    moveY = 0;
-    grid = mazeGrid;
-    gridMode = 1;
-  }
-  // else if (key === "m" || key === "M") {
-  //   grid = createMaze2dArray(cols, rows);
+  // if (key === "j" || key === "J") {
+  //   clearOutBodies();
+  //   moveX = 0;
+  //   moveY = 5;
+  //   grid = mazeGrid;
   //   gridMode = 1;
   // }
-  if (key === "s" || key === "S") {
-    clearOutBodies();
-    moveX = 0;
-    moveY = 0;
-    if (gridMode === 0) {
-      grid = createEmpty2dArray(cols, rows);
-    }
-    else if (gridMode === 1) {
-      grid = mazeGrid;
-    }
-  }
-  else if (keyCode === DOWN_ARROW && moveY < rows - 1) {
+  // else if (key === "k" || key === "K") {
+  //   clearOutBodies();
+  //   moveX = 8;
+  //   moveY = 26;
+  //   grid = mazeGrid2;
+  //   gridMode = 2;
+  // }
+  // if (key === "s" || key === "S") {
+  //   clearOutBodies();
+  //   moveX = 32;
+  //   moveY = 25;
+  //   grid = mazeGrid3;
+  //   gridMode = 3;
+  // }
+  // Arrow keys are used to make the red square move in the screen, can't go through the black squares.
+  if (keyCode === DOWN_ARROW && moveY < rows - 1 && gridMode < 4) {
     grid[moveX][moveY] = 0;
-    if (grid[moveX][moveY + 1] === 0) {
+    if (grid[moveX][moveY + 1] === 0 || grid[moveX][moveY + 1] === "0") {
       moveY += 1;
     }
+    else if (grid[moveX][moveY + 1] === 3 || grid[moveX][moveY + 1] === "3") {
+      moveY += 1;
+      nextLevel();
+    }
   }
-  if (keyCode === UP_ARROW && moveY > 0) {
+  else if (keyCode === UP_ARROW && moveY > 0 && gridMode < 4) {
     grid[moveX][moveY] = 0;
-    if (grid[moveX][moveY - 1] === 0) {
+    if (grid[moveX][moveY - 1] === 0 || grid[moveX][moveY - 1] === "0") {
       moveY -= 1;
     }
-  }
-  else if (keyCode === RIGHT_ARROW && moveX < cols - 1) {
-    grid[moveX][moveY] = 0;
-    if (grid[moveX + 1][moveY] === 0) {
-      moveX += 1;
+    else if (grid[moveX][moveY - 1] === 3 || grid[moveX][moveY - 1] === "3") {
+      moveY -= 1;
+      nextLevel();
     }
   }
-  if (keyCode === LEFT_ARROW && moveX > 0) {
+  if (keyCode === RIGHT_ARROW && moveX < cols - 1 && gridMode < 4) {
     grid[moveX][moveY] = 0;
-    if (grid[moveX - 1][moveY] === 0) {
+    if (grid[moveX + 1][moveY] === 0 || grid[moveX + 1][moveY] === "0") {
+      moveX += 1;
+    }
+    else if (grid[moveX + 1][moveY] === 3 || grid[moveX + 1][moveY] === "3") {
+      moveX += 1;
+      nextLevel();
+    }
+  }
+  else if (keyCode === LEFT_ARROW && moveX > 0 && gridMode < 4) {
+    grid[moveX][moveY] = 0;
+    if (grid[moveX - 1][moveY] === 0 || grid[moveX - 1][moveY] === "0") {
       moveX -= 1;
+    }
+    else if (grid[moveX - 1][moveY] === 3 || grid[moveX - 1][moveY] === "3") {
+      moveX -= 1;
+      nextLevel();
     }
   }
 }
 
+//Just so there isn't two red squares in the screen
 function clearOutBodies() {
   let theGrid = grid;
   for (let x = 0; x < cols; x++) {
@@ -184,6 +226,7 @@ function clearOutBodies() {
   return theGrid;
 }
 
+//Creates the base for the maze
 function createEmpty2dArray(cols, rows) {
   let emptyGrid = [];
   for (let x = 0; x < cols; x++) {
