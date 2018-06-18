@@ -2,8 +2,8 @@
 // Xyre Abelanes
 // April 16, 2018
 
-let rows = 27;
-let cols = 33;
+let rows = 20;
+let cols = 16;
 let grid;
 let cellSize;
 let moveX;
@@ -237,74 +237,3 @@ function createEmpty2dArray(cols, rows) {
   }
   return emptyGrid;
 }
-
-// function createMaze2dArray(cols, rows) {
-//   let mazeGrid = [];
-//   let test = 2;
-//   let test2 = 5;
-//   let number = 0;
-//   let number2 = 1;
-//   let wall = 2;
-//   let wall2 = 6;
-//   for (let x = 0; x < cols; x++) {
-//     mazeGrid.push([]);
-//     number += 1;
-//     number2 += 1;
-//     wall = 2;
-//     wall2 = 6;
-//     for (let y = 0; y < rows; y++) {
-//       if (number === test && y === 0) {
-//         mazeGrid[x].push(1);
-//         mazeGrid[x].push(1);
-//       }
-//       else if (number2 === test2 && y === 1) {
-//         for (let z = 0; z < 5; z++) {
-//           mazeGrid[x].push(1);
-//         }
-//       }
-//       if (number === test && y === 3) {
-//         for (let z = 0; z < 5; z++) {
-//           mazeGrid[x].push(1);
-//         }
-//       }
-//       else if (number2 === test2 && y === 4) {
-//         for (let z = 0; z < 5; z++) {
-//           mazeGrid[x].push(1);
-//         }
-//       }
-//       if (number === test && y === 6) {
-//         for (let z = 0; z < 5; z++) {
-//           mazeGrid[x].push(1);
-//         }
-//       }
-//       else if (number2 === test2 && y === 7) {
-//         for (let z = 0; z < 5; z++) {
-//           mazeGrid[x].push(1);
-//         }
-//       }
-//       if (number2 === test2 && y === 10) {
-//         mazeGrid[x].push(1);
-//         mazeGrid[x].push(1);
-//         test2 += 4;
-//       }
-//       else if (number === test && y === 9) {
-//         for (let z = 0; z < 5; z++) {
-//           mazeGrid[x].push(1);
-//         }
-//         test += 4;
-//       }
-//       if (mazeGrid[x][wall] === 0 && x < cols - 1) {
-//         mazeGrid[x].push(1);
-//         wall += 8;
-//       }
-//       else if (mazeGrid[x][wall2] === 0 && x > 0) {
-//         mazeGrid[x].push(1);
-//         wall2 += 8;
-//       }
-//       else {
-//         mazeGrid[x].push(0);
-//       }
-//     }
-//   }
-//   return mazeGrid;
-// }
