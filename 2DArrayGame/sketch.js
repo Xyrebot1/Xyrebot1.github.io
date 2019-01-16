@@ -2,7 +2,7 @@
 // Xyre Abelanes
 // April 16, 2018
 
-let rows = 20;
+let rows = 33;
 let cols = 16;
 let grid;
 let cellSize;
