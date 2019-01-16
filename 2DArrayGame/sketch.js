@@ -3,7 +3,7 @@
 // April 16, 2018
 
 let rows = 33;
-let cols = 16;
+let cols = 33;
 let grid;
 let cellSize;
 let moveX;
